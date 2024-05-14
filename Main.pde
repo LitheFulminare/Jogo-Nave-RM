@@ -47,8 +47,14 @@ void render()
   {
     shot.render();
     
-    if (shot.getX() >= rock.getX() &&shot.getX() <= rock.getX()+rock.getL() && shot.getY() >= rock.getY() && shot.getY() <= rock.getY()+rock.getL())
+    
+    // shot collision with rock
+    if (shot.getX() >= rock.getX() && shot.getX() <= rock.getX()+rock.getL() && shot.getY() >= rock.getY() && shot.getY() <= rock.getY()+rock.getL())
       rock.destroy();
+      
+    // shot collision with enemy; 25 is the enemy's radius
+    if (shot.getX() >= enemy.getX()-25 && shot.getX() <= enemy.getX()+25 && shot.getY() >= enemy.getY()-25 && shot.getY() <= enemy.getY()+25)
+      enemy.destroy();
   }
 }
 
