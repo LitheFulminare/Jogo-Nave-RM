@@ -28,6 +28,8 @@ void draw() {
 
 void update(float et) 
 {
+  //print(powerup.getPos().x);
+  //print(powerup.getPos().y);
   ship.update(et);
 
   enemy.updateDirection(ship);
@@ -75,11 +77,12 @@ void render()
       enemy.destroy();      
     }
       
-    if (ship.getPos().x >= powerup.getPos().x - 35 && ship.getPos().x <= powerup.getPos().x + 35 && ship.getPos().y >= powerup.getPos().y - 35 && ship.getPos().y <= powerup.getPos().y + 35)
-    {
-      print("colisao");
-      powerup.destroy(); 
-    }
+  }
+  // ship collision with powerup
+  if (ship.getX() >= powerup.getX() - 35 && ship.getX() <= powerup.getX() + 35 && ship.getY() >= powerup.getY() - 35 && ship.getY() <= powerup.getY() + 35)
+  {
+    powerup.destroy(); 
+    ship.powerup();
   }
 }
 

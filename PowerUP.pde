@@ -25,4 +25,13 @@ class PowerUP
   {
     return pos;
   }
+  
+  float getX()
+  {
+    return pos.x;
+  }
+  float getY()
+  {
+    return pos.y;
+  }
 }
