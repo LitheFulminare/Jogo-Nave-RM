@@ -1,9 +1,13 @@
 float startTime = 0;
 
 Ship ship = new Ship(new PVector(50, 384), new PVector(1, 0));
+
 Enemy enemy = new Enemy(new PVector(50,50), new PVector(1,0));
+
 Rock rock = new Rock(100,100,70);
 Rock rock2 = new Rock(800,600,30);
+
+PowerUP powerup = new PowerUP(new PVector(100,600));
 
 ArrayList<Shot> shots = new ArrayList<>();
 
@@ -23,10 +27,13 @@ void draw() {
 
 void update(float et) 
 {
+  ship.update(et);
+
   enemy.updateDirection(ship);
   enemy.update(et);
   
-  ship.update(et);
+  powerup.render();
+  
   Shot shotToRemove = null;
   print("Quantidade de tiros: " + shots.size() + "\n");
   for (Shot shot: shots) {
