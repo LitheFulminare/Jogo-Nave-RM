@@ -48,7 +48,6 @@ void update(float et)
   {
     shots.remove(shotToRemove);
   }
-  //if shot
 }
 
 void render() 
