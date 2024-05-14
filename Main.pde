@@ -35,6 +35,7 @@ void update(float et)
   if (shotToRemove != null) {
     shots.remove(shotToRemove);
   }
+  //if shot
 }
 
 void render() 
@@ -42,16 +43,22 @@ void render()
   enemy.render();
   ship.render();
   rock.render();
-  for (Shot shot: shots) {
+  for (Shot shot: shots) 
+  {
     shot.render();
+    
+    if (shot.getX() >= rock.getX() &&shot.getX() <= rock.getX()+rock.getL() && shot.getY() >= rock.getY() && shot.getY() <= rock.getY()+rock.getL())
+      rock.destroy();
   }
 }
 
-void keyPressed() {
+void keyPressed() 
+{
   ship.keyP(key, keyCode);
 }
 
-void keyReleased() {
+void keyReleased() 
+{
   ship.keyR(key, keyCode);
 }
 
