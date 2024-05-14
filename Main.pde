@@ -1,4 +1,5 @@
 float startTime = 0;
+boolean powerupCollected = false;
 
 Ship ship = new Ship(new PVector(50, 384), new PVector(1, 0));
 
@@ -43,7 +44,8 @@ void update(float et)
     if (shot.update(et))
       shotToRemove = shot;
   }
-  if (shotToRemove != null) {
+  if (shotToRemove != null) 
+  {
     shots.remove(shotToRemove);
   }
   //if shot
@@ -51,6 +53,9 @@ void update(float et)
 
 void render() 
 {
+  textSize(50);
+  text("Life: " + ship.getLife(), 10,45);
+  
   enemy.render();
   ship.render();
   rock.render();
@@ -81,8 +86,12 @@ void render()
   // ship collision with powerup
   if (ship.getX() >= powerup.getX() - 35 && ship.getX() <= powerup.getX() + 35 && ship.getY() >= powerup.getY() - 35 && ship.getY() <= powerup.getY() + 35)
   {
-    powerup.destroy(); 
-    ship.powerup();
+    if (!powerupCollected)
+    {
+      powerupCollected = true;
+      powerup.destroy(); 
+      ship.powerup(); 
+    }  
   }
 }
 
