@@ -60,10 +60,18 @@ void render()
     // shot collision with rock
     if (shot.getX() >= rock.getX() && shot.getX() <= rock.getX()+rock.getL() && shot.getY() >= rock.getY() && shot.getY() <= rock.getY()+rock.getL())
       rock.destroy();
+    if (shot.getX() >= rock2.getX() && shot.getX() <= rock2.getX()+rock2.getL() && shot.getY() >= rock2.getY() && shot.getY() <= rock2.getY()+rock2.getL())
+      rock2.destroy();
       
-    // shot collision with enemy; 25 is the enemy's radius
+    // shot collision with enemy
     if (shot.getX() >= enemy.getX()-25 && shot.getX() <= enemy.getX()+25 && shot.getY() >= enemy.getY()-25 && shot.getY() <= enemy.getY()+25)
       enemy.destroy();
+      
+    if (ship.getPos().x >= powerup.getPos().x - 35 && ship.getPos().x <= powerup.getPos().x + 35 && ship.getPos().y >= powerup.getPos().y - 35 && ship.getPos().y <= powerup.getPos().y + 35)
+    {
+      print("colisao");
+      rock.destroy(); 
+    }
   }
 }
 

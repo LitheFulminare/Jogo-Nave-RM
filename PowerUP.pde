@@ -9,6 +9,11 @@ class PowerUP
   
   void render()
   {
-    circle(pos.x,pos.y,75);
+    circle(pos.x,pos.y,70);
+  }
+  
+  PVector getPos()
+  {
+    return pos;
   }
 }
