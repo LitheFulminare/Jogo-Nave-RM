@@ -1,6 +1,7 @@
 class PowerUP
 {
   private PVector pos;
+  private boolean destroyed = false;
   
   PowerUP(PVector pos)
   {
@@ -9,7 +10,15 @@ class PowerUP
   
   void render()
   {
-    circle(pos.x,pos.y,70);
+    if (!destroyed)
+    {
+    circle(pos.x,pos.y,70);      
+    }
+  }
+  
+  void destroy()
+  {
+    destroyed = true;
   }
   
   PVector getPos()
