@@ -103,6 +103,10 @@ void render() {
   for (Eshot eshot: eshots)
   {
     eshot.render();
+    
+    if (eshot.getX() >= ship.getX() - 25 && eshot.getX() <= ship.getX() + 25 && eshot.getY() >= ship.getY() - 25 && eshot.getY() <= ship.getY() + 25) {
+      ship.damage();
+    }
   }
   
   for (Shot shot: shots) {

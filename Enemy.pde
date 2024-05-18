@@ -72,9 +72,10 @@ class Enemy {
     dir = directionToShip.normalize();
   }
   
-  void destroy() {
+  void destroy() 
+  { 
     deathTime = millis();
-    destroyed = true;
+    destroyed = true; 
   }
   
   float getX() {

@@ -5,7 +5,10 @@ class Ship {
   private float vel = 350f;
   private boolean left = false;
   private boolean right = false;
+  private boolean destroyed = false;
+  private boolean invincible = false;
   private int life = 3;
+  private float hitTime = 0;
   
   Ship(PImage img, PVector pos, PVector dir)
   {
@@ -19,6 +22,13 @@ class Ship {
     if (right) dir.rotate(PI * 1.5 * et);
     PVector m = PVector.mult(dir, vel * et);
     pos.add(m);
+    
+    
+    // verifica se o timer de invencibilidade acabou
+    if (hitTime + 2 * 1000 < millis()) 
+    {
+      invincible = false;
+    }
   }
   
   void render() {
@@ -48,6 +58,17 @@ class Ship {
   void powerup() 
   {
     life += 1;
+  }
+  
+  void damage()
+  {
+    if (life > 0 && !invincible)
+    {
+      invincible = true;
+      life -= 1;
+      hitTime = millis(); // começa do timer de invencibilidade
+    }
+    
   }
   
   void keyR(int k, int kc) {
