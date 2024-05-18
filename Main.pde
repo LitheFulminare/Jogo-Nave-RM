@@ -18,6 +18,7 @@ Enemy enemy;
 Rock rock1;
 Rock rock2;
 PowerUP powerup;
+FleeingEnemy fl_enemy;
 
 ArrayList<Shot> shots = new ArrayList<>(); // player shots
 ArrayList<Eshot> eshots = new ArrayList<>(); // enemy shots
@@ -39,6 +40,7 @@ void setup() {
 
     ship = new Ship(shipImage, new PVector(50, 384), new PVector(1, 0));
     enemy = new Enemy(enemyImage, new PVector(50, 50), new PVector(1, 0));
+    fl_enemy = new FleeingEnemy(enemyImage, new PVector(500, 500), new PVector(1, 0));
     rock1 = new Rock(100, 100, 70, rockImage); 
     rock2 = new Rock(800, 600, 30, rock2Image);
     powerup = new PowerUP(new PVector(100, 600)); // Cria o power-up
@@ -70,6 +72,7 @@ void update(float et)
   
     ship.update(et);
     enemy.update(ship, et);
+    fl_enemy.update(ship,et);
     powerup.render();
   
     Shot shotToRemove = null;
@@ -112,6 +115,7 @@ void render()
     text("Life: " + ship.getLife(), 10, 45);
   
     enemy.render();
+    fl_enemy.render();
     ship.render();
     rock1.render();
     rock2.render();
