@@ -63,7 +63,7 @@ class FleeingEnemy {
   
   void follow(Ship ship) {
     // Calcula o vetor direção entre a posição da nave inimiga e a posição da nave principal
-    PVector directionToShip = PVector.add(ship.getPos(), pos);
+    PVector directionToShip = PVector.sub(pos, ship.getPos());
   
     // Normaliza o vetor direção
     dir = directionToShip.normalize();
@@ -78,7 +78,7 @@ class FleeingEnemy {
   // Atualiza a direção da nave inimiga para apontar para a posição da nave principal
   void updateDirection(Ship ship) {
     // Calcula o vetor direção entre a posição da nave inimiga e a posição da nave principal
-    PVector directionToShip = PVector.sub(ship.getPos(), pos);
+    PVector directionToShip = PVector.sub(pos, ship.getPos());
   
     // Normaliza o vetor direção
     dir = directionToShip.normalize();
