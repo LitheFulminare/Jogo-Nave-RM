@@ -27,7 +27,15 @@ void setup() {
   size(1024, 768); // Move a chamada de size() para fora do bloco try-catch
 
   try {
-    img = loadImage("BG.png");
+    
+    if (screen == "game")
+    {
+      img = loadImage("BG.png");
+    }
+    else 
+    {
+      img = loadImage("BG.png");
+    }
     shipImage = loadImage("Nave Principal.png");
     enemyImage = loadImage("Nave inimiga.png");
     rockImage = loadImage("Asteroide Grande.png");
