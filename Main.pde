@@ -7,6 +7,11 @@ PImage rockImage;
 PImage rock2Image;
 PImage PowerUP;
 
+
+
+
+
+
 Ship ship;
 Enemy enemy;
 Rock rock1;
