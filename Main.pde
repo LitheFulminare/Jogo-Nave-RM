@@ -12,6 +12,7 @@ PImage enemyImage;
 PImage rockImage;
 PImage rock2Image;
 PImage PowerUP;
+PImage fl_enemyImage;
 
 Ship ship;
 Enemy enemy;
@@ -27,13 +28,13 @@ void setup() {
   size(1024, 768); // Move a chamada de size() para fora do bloco try-catch
 
   try {
-    
-    img = loadImage("BG.png");
+    img = loadImage("Menu.png");
     shipImage = loadImage("Nave Principal.png");
     enemyImage = loadImage("Nave inimiga.png");
     rockImage = loadImage("Asteroide Grande.png");
     rock2Image = loadImage("Asteroide pequeno.png");
     PowerUP = loadImage("Power-up.png");
+    fl_enemyImage = loadImage("Nave Inimiga2.png");
 
     if (enemyImage == null) {
       println("Erro ao carregar a imagem do inimigo!");
@@ -41,7 +42,7 @@ void setup() {
 
     ship = new Ship(shipImage, new PVector(50, 384), new PVector(1, 0));
     enemy = new Enemy(enemyImage, new PVector(50, 50), new PVector(1, 0));
-    fl_enemy = new FleeingEnemy(enemyImage, new PVector(500, 500), new PVector(1, 0));
+    fl_enemy = new FleeingEnemy(fl_enemyImage, new PVector(500, 500), new PVector(1, 0));
     rock1 = new Rock(100, 100, 70, rockImage); 
     rock2 = new Rock(800, 600, 30, rock2Image);
     powerup = new PowerUP(new PVector(100, 600)); // Cria o power-up
@@ -155,7 +156,7 @@ void render()
   if (screen == "gameover")
   {
     textSize(50);
-    text("Você matou " + enemiesKilled + " inimigo(s)", 250,400);
+    text("Você matou " + enemiesKilled + " inimigo(s)", 250,500);
   }
   
 }
@@ -163,6 +164,7 @@ void render()
 void endGame()
 {
   screen = "gameover";
+  img = loadImage("tela de game over4.png");
 }
 
 
@@ -188,6 +190,7 @@ void mousePressed()
   if (screen == "menu")
   {
     screen = "game";
+    img = loadImage("BG.png");
   }
   
   if (screen == "game")
