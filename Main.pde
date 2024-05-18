@@ -1,5 +1,6 @@
 float startTime = 0;
 boolean powerupCollected = false;
+
 PImage img;
 PImage shipImage;
 PImage enemyImage;
@@ -13,7 +14,8 @@ Rock rock1;
 Rock rock2;
 PowerUP powerup;
 
-ArrayList<Shot> shots = new ArrayList<>();
+ArrayList<Shot> shots = new ArrayList<>(); // player shots
+ArrayList<Eshot> eshots = new ArrayList<>(); // enemy shots
 
 void setup() {
   size(1024, 768); // Move a chamada de size() para fora do bloco try-catch
@@ -32,7 +34,7 @@ void setup() {
 
     ship = new Ship(shipImage, new PVector(50, 384), new PVector(1, 0));
     enemy = new Enemy(enemyImage, new PVector(50, 50), new PVector(1, 0));
-    rock1 = new Rock(100, 100, 70, rockImage);
+    rock1 = new Rock(100, 100, 70, rockImage); 
     rock2 = new Rock(800, 600, 30, rock2Image);
     powerup = new PowerUP(new PVector(100, 600)); // Cria o power-up
     startTime = millis();
@@ -69,6 +71,16 @@ void update(float et) {
     shots.remove(shotToRemove);
   }
   
+  Eshot eshotToRemove = null;
+  print("Quantidade de tiros inimigos: " + eshots.size() + "\n");
+  for (Eshot eshot: eshots) {
+    if (eshot.update(et))
+      eshotToRemove = eshot;
+  }
+  if (eshotToRemove != null) {
+    eshots.remove(eshotToRemove);
+  }
+  
   // Detecção de colisão com o power-up
   if (ship.getX() >= powerup.getX() - 35 && ship.getX() <= powerup.getX() + 35 && ship.getY() >= powerup.getY() - 35 && ship.getY() <= powerup.getY() + 35) {
     if (!powerupCollected) {
@@ -88,8 +100,14 @@ void render() {
   rock1.render();
   rock2.render();
   
+  for (Eshot eshot: eshots)
+  {
+    eshot.render();
+  }
+  
   for (Shot shot: shots) {
     shot.render();
+    
     
     // Detecção de colisão com os asteroides
     if (shot.getX() >= rock1.getX() && shot.getX() <= rock1.getX() + rock1.getL() && shot.getY() >= rock1.getY() && shot.getY() <= rock1.getY() + rock1.getL()) {
@@ -115,6 +133,8 @@ void keyReleased() {
   ship.keyR(key, keyCode);
 }
 
-void mousePressed() {
+void mousePressed() 
+{
   shots.add(ship.shoot());
+  eshots.add(enemy.shoot());
 }

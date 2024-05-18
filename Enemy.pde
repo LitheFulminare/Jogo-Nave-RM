@@ -12,6 +12,11 @@ class Enemy {
     this.dir = dir;
   }
   
+  Eshot shoot() 
+  {
+    return new Eshot(pos.copy(), dir.copy());
+  }
+  
   void update(Ship ship, float et) {
     follow(ship); // Atualiza a direção da nave inimiga em relação à nave principal
     move(et); // Move a nave inimiga

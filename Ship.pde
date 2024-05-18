@@ -45,7 +45,8 @@ class Ship {
     }
   }
   
-  void powerup() {
+  void powerup() 
+  {
     life += 1;
   }
   
