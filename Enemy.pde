@@ -74,8 +74,13 @@ class Enemy {
   
   void destroy() 
   { 
-    deathTime = millis();
-    destroyed = true; 
+    if (!destroyed)
+    {
+      destroyed = true; 
+      deathTime = millis();  
+      enemiesKilled += 1;
+    }
+    
   }
   
   float getX() {

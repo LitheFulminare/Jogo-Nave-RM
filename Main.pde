@@ -1,5 +1,6 @@
 float startTime = 0;
 boolean powerupCollected = false;
+int enemiesKilled = 0;
 
 PImage img;
 PImage shipImage;
@@ -56,7 +57,10 @@ void draw() {
   render();
 }
 
-void update(float et) {
+void update(float et) 
+{
+  print("enemies killed: " + enemiesKilled + "\n");
+  
   ship.update(et);
   enemy.update(ship, et);
   powerup.render();
@@ -125,6 +129,7 @@ void render() {
     // Detecção de colisão com o inimigo
     if (shot.getX() >= enemy.getX() - 25 && shot.getX() <= enemy.getX() + 25 && shot.getY() >= enemy.getY() - 25 && shot.getY() <= enemy.getY() + 25) {
       enemy.destroy();
+      
     }
   }
 }
