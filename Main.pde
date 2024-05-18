@@ -66,82 +66,86 @@ void update(float et)
 {
   if (screen == "game")
   {
-    
-  }
-  print("enemies killed: " + enemiesKilled + "\n");
+     print("enemies killed: " + enemiesKilled + "\n");
   
-  ship.update(et);
-  enemy.update(ship, et);
-  powerup.render();
+    ship.update(et);
+    enemy.update(ship, et);
+    powerup.render();
   
-  Shot shotToRemove = null;
-  print("Quantidade de tiros: " + shots.size() + "\n");
-  for (Shot shot: shots) {
-    if (shot.update(et))
-      shotToRemove = shot;
-  }
-  if (shotToRemove != null) {
-    shots.remove(shotToRemove);
-  }
+    Shot shotToRemove = null;
+    print("Quantidade de tiros: " + shots.size() + "\n");
+    for (Shot shot: shots) {
+      if (shot.update(et))
+        shotToRemove = shot;
+    }
+    if (shotToRemove != null) {
+      shots.remove(shotToRemove);
+    }
   
-  Eshot eshotToRemove = null;
-  print("Quantidade de tiros inimigos: " + eshots.size() + "\n");
-  for (Eshot eshot: eshots) {
-    if (eshot.update(et))
-      eshotToRemove = eshot;
-  }
-  if (eshotToRemove != null) {
-    eshots.remove(eshotToRemove);
-  }
+    Eshot eshotToRemove = null;
+    print("Quantidade de tiros inimigos: " + eshots.size() + "\n");
+    for (Eshot eshot: eshots) {
+      if (eshot.update(et))
+        eshotToRemove = eshot;
+    }
+    if (eshotToRemove != null) {
+      eshots.remove(eshotToRemove);
+    }
   
-  // Detecção de colisão com o power-up
-  if (ship.getX() >= powerup.getX() - 35 && ship.getX() <= powerup.getX() + 35 && ship.getY() >= powerup.getY() - 35 && ship.getY() <= powerup.getY() + 35) {
-    if (!powerupCollected) {
-      powerupCollected = true;
-      powerup.destroy(); // Destrua o power-up após coletá-lo
-      ship.powerup(); // Realize a lógica de power-up aqui
+    // Detecção de colisão com o power-up
+    if (ship.getX() >= powerup.getX() - 35 && ship.getX() <= powerup.getX() + 35 && ship.getY() >= powerup.getY() - 35 && ship.getY() <= powerup.getY() + 35) {
+      if (!powerupCollected) {
+        powerupCollected = true;
+        powerup.destroy(); // Destrua o power-up após coletá-lo
+        ship.powerup(); // Realize a lógica de power-up aqui
+      }
     }
   }
+ 
 }
 
 void render() 
 {
-  textSize(50);
-  text("Life: " + ship.getLife(), 10, 45);
-  
-  enemy.render();
-  ship.render();
-  rock1.render();
-  rock2.render();
-  
-  for (Eshot eshot: eshots)
+  if (screen == "game")
   {
-    eshot.render();
+    textSize(50);
+    text("Life: " + ship.getLife(), 10, 45);
+  
+    enemy.render();
+    ship.render();
+    rock1.render();
+    rock2.render();
+  
+    for (Eshot eshot: eshots)
+    {
+      eshot.render();
     
-    if (eshot.getX() >= ship.getX() - 25 && eshot.getX() <= ship.getX() + 25 && eshot.getY() >= ship.getY() - 25 && eshot.getY() <= ship.getY() + 25) {
-      ship.damage();
+      if (eshot.getX() >= ship.getX() - 25 && eshot.getX() <= ship.getX() + 25 && eshot.getY() >= ship.getY() - 25 && eshot.getY() <= ship.getY() + 25) {
+        ship.damage();
+      }
+    }
+  
+    for (Shot shot: shots) {
+      shot.render();
+    
+    
+      // Detecção de colisão com os asteroides
+      if (shot.getX() >= rock1.getX() && shot.getX() <= rock1.getX() + rock1.getL() && shot.getY() >= rock1.getY() && shot.getY() <= rock1.getY() + rock1.getL()) {
+        rock1.destroy();
+      }
+    
+      if (shot.getX() >= rock2.getX() && shot.getX() <= rock2.getX() + rock2.getL() && shot.getY() >= rock2.getY() && shot.getY() <= rock2.getY() + rock2.getL()) {
+        rock2.destroy();
+      }
+    
+      // Detecção de colisão com o inimigo
+      if (shot.getX() >= enemy.getX() - 25 && shot.getX() <= enemy.getX() + 25 && shot.getY() >= enemy.getY() - 25 && shot.getY() <= enemy.getY() + 25) {
+        enemy.destroy();
+      
+      }
     }
   }
   
-  for (Shot shot: shots) {
-    shot.render();
-    
-    
-    // Detecção de colisão com os asteroides
-    if (shot.getX() >= rock1.getX() && shot.getX() <= rock1.getX() + rock1.getL() && shot.getY() >= rock1.getY() && shot.getY() <= rock1.getY() + rock1.getL()) {
-      rock1.destroy();
-    }
-    
-    if (shot.getX() >= rock2.getX() && shot.getX() <= rock2.getX() + rock2.getL() && shot.getY() >= rock2.getY() && shot.getY() <= rock2.getY() + rock2.getL()) {
-      rock2.destroy();
-    }
-    
-    // Detecção de colisão com o inimigo
-    if (shot.getX() >= enemy.getX() - 25 && shot.getX() <= enemy.getX() + 25 && shot.getY() >= enemy.getY() - 25 && shot.getY() <= enemy.getY() + 25) {
-      enemy.destroy();
-      
-    }
-  }
 }
 
 void endGame()
