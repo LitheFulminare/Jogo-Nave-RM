@@ -28,14 +28,7 @@ void setup() {
 
   try {
     
-    if (screen == "game")
-    {
-      img = loadImage("BG.png");
-    }
-    else 
-    {
-      img = loadImage("BG.png");
-    }
+    img = loadImage("BG.png");
     shipImage = loadImage("Nave Principal.png");
     enemyImage = loadImage("Nave inimiga.png");
     rockImage = loadImage("Asteroide Grande.png");
