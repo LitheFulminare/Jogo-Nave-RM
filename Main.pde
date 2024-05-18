@@ -146,10 +146,16 @@ void render()
       }
     
       // Detecção de colisão com o inimigo
-      if (shot.getX() >= enemy.getX() - 25 && shot.getX() <= enemy.getX() + 25 && shot.getY() >= enemy.getY() - 25 && shot.getY() <= enemy.getY() + 25) {
-        enemy.destroy();
-      
+      if (shot.getX() >= enemy.getX() - 25 && shot.getX() <= enemy.getX() + 25 && shot.getY() >= enemy.getY() - 25 && shot.getY() <= enemy.getY() + 25) 
+      {
+        enemy.destroy();     
       }
+      
+      if (shot.getX() >= fl_enemy.getX() - 25 && shot.getX() <= fl_enemy.getX() + 25 && shot.getY() >= fl_enemy.getY() - 25 && shot.getY() <= fl_enemy.getY() + 25) 
+      {
+        fl_enemy.destroy();     
+      }
+      
     }
   }
   

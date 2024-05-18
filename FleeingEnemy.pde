@@ -4,7 +4,7 @@ class FleeingEnemy {
   private PVector pos;
   private PVector dir;
   
-  private float vel = 200f; // Velocidade da nave inimiga
+  private float vel = 150f; // Velocidade da nave inimiga
   
   private boolean destroyed = false;
   private boolean outOfBounds = false;
@@ -55,15 +55,15 @@ class FleeingEnemy {
     
     // Verifica se a nave inimiga está destruída
     if (deathTime + 2 * 1000 < millis() && destroyed) {
-      pos.x = 50;
-      pos.y = 50;
+      pos.x = 400;
+      pos.y = 400;
       destroyed = false;
     }
   }
   
   void follow(Ship ship) {
     // Calcula o vetor direção entre a posição da nave inimiga e a posição da nave principal
-    PVector directionToShip = PVector.sub(ship.getPos(), pos);
+    PVector directionToShip = PVector.add(ship.getPos(), pos);
   
     // Normaliza o vetor direção
     dir = directionToShip.normalize();
