@@ -1,6 +1,10 @@
 float startTime = 0;
-boolean powerupCollected = false;
+
 int enemiesKilled = 0;
+
+boolean powerupCollected = false;
+
+String screen = "menu"; // pode ser "menu", "game" e "gameover" para saber qual tela deve renderizar
 
 PImage img;
 PImage shipImage;
@@ -45,7 +49,8 @@ void setup() {
   }
 }
 
-void draw() {
+void draw() 
+{
   float elapsedTime = (millis() - startTime) / 1000f;
   startTime = millis();
   
@@ -59,6 +64,10 @@ void draw() {
 
 void update(float et) 
 {
+  if (screen == "game")
+  {
+    
+  }
   print("enemies killed: " + enemiesKilled + "\n");
   
   ship.update(et);
@@ -95,7 +104,8 @@ void update(float et)
   }
 }
 
-void render() {
+void render() 
+{
   textSize(50);
   text("Life: " + ship.getLife(), 10, 45);
   
@@ -132,6 +142,11 @@ void render() {
       
     }
   }
+}
+
+void endGame()
+{
+  screen = "gameover";
 }
 
 void keyPressed() {

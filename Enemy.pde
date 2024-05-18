@@ -1,9 +1,13 @@
 class Enemy {
   PImage img;
+  
   private PVector pos;
   private PVector dir;
+  
   private float vel = 200f; // Velocidade da nave inimiga
+  
   private boolean destroyed = false;
+  private boolean outOfBounds = false;
   
   private int timer = millis();
   private int deathTime = 0;
@@ -15,15 +19,18 @@ class Enemy {
     this.dir = dir;
   }
   
-  Eshot shoot() 
-  {
-    return new Eshot(pos.copy(), dir.copy());
-  }
+  
   
   void update(Ship ship, float et) {
     follow(ship); // Atualiza a direção da nave inimiga em relação à nave principal
     move(et); // Move a nave inimiga
     // O restante do código permanece o mesmo...
+    
+    if (pos.x > width || pos.x < -35 || pos.y > height || pos.y < - 35)
+    {
+      outOfBounds = true;
+      destroy(); 
+    }
     
     if (millis() - timer >= 250)
     { 
@@ -31,9 +38,13 @@ class Enemy {
       {
         enemyShooting();
         timer = millis();
-      }
-      
+      }  
     }
+  }
+  
+  Eshot shoot() 
+  {
+    return new Eshot(pos.copy(), dir.copy());
   }
   
   void move(float et) {
@@ -77,10 +88,13 @@ class Enemy {
     if (!destroyed)
     {
       destroyed = true; 
-      deathTime = millis();  
-      enemiesKilled += 1;
+      deathTime = millis();
+      if (!outOfBounds)
+      {
+        enemiesKilled += 1;
+      }
     }
-    
+    outOfBounds = false;   
   }
   
   float getX() {
