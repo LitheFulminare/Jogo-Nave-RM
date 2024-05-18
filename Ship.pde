@@ -99,6 +99,7 @@ class Ship {
     {
       destroyed = true; 
       deathTime = millis();
+      endGame();
     }
   }
   

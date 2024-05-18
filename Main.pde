@@ -109,6 +109,7 @@ void update(float et)
 
 void render() 
 {
+  
   if (screen == "game")
   {
     textSize(50);
@@ -148,6 +149,12 @@ void render()
       
       }
     }
+  }
+  
+  if (screen == "gameover")
+  {
+    textSize(50);
+    text("Você matou " + enemiesKilled + " inimigo(s)", 250,400);
   }
   
 }

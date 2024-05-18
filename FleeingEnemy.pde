@@ -33,14 +33,14 @@ class FleeingEnemy {
       destroy(); 
     }
     
-    if (millis() - timer >= 250)
-    { 
-      if (!destroyed)
-      {
-        enemyShooting();
-        timer = millis();
-      }  
-    }
+    //if (millis() - timer >= 250)
+    //{ 
+      //if (!destroyed)
+      //{
+        //enemyShooting();
+        //timer = millis();
+      //}  
+    //}
   }
   
   Eshot shoot() 
