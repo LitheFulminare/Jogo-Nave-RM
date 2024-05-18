@@ -153,21 +153,41 @@ void endGame()
   screen = "gameover";
 }
 
-void keyPressed() {
-  ship.keyP(key, keyCode);
+
+
+void keyPressed() 
+{
+  if (screen == "game")
+  {
+    ship.keyP(key, keyCode);
+  }
 }
 
-void keyReleased() {
-  ship.keyR(key, keyCode);
+void keyReleased() 
+{
+  if (screen == "game")
+  {
+    ship.keyR(key, keyCode);
+  }
 }
 
 void mousePressed() 
 {
-  shots.add(ship.shoot());
+  if (screen == "menu")
+  {
+    screen = "game";
+  }
   
+  if (screen == "game")
+  {
+    shots.add(ship.shoot());
+  }
 }
 
 void enemyShooting()
 {
-  eshots.add(enemy.shoot());
+  if (screen == "game")
+  {
+    eshots.add(enemy.shoot());
+  }
 }
