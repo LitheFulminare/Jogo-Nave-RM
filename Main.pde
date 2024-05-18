@@ -1,7 +1,6 @@
 float startTime = 0;
 boolean powerupCollected = false;
-// comentario teste
-// comentario teste 2
+
 
 Ship ship = new Ship(new PVector(50, 384), new PVector(1, 0));
 
