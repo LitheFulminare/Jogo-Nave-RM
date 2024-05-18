@@ -136,5 +136,10 @@ void keyReleased() {
 void mousePressed() 
 {
   shots.add(ship.shoot());
+  
+}
+
+void enemyShooting()
+{
   eshots.add(enemy.shoot());
 }

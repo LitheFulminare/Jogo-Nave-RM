@@ -4,7 +4,10 @@ class Enemy {
   private PVector dir;
   private float vel = 200f; // Velocidade da nave inimiga
   private boolean destroyed = false;
+  
+  private int timer = millis();
   private int deathTime = 0;
+  //private int shootTime = 0;
   
   Enemy(PImage img, PVector pos, PVector dir) {
     this.img = img;
@@ -21,6 +24,16 @@ class Enemy {
     follow(ship); // Atualiza a direção da nave inimiga em relação à nave principal
     move(et); // Move a nave inimiga
     // O restante do código permanece o mesmo...
+    
+    if (millis() - timer >= 250)
+    { 
+      if (!destroyed)
+      {
+        enemyShooting();
+        timer = millis();
+      }
+      
+    }
   }
   
   void move(float et) {
